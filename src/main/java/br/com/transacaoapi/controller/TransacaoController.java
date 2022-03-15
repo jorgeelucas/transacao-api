@@ -27,7 +27,7 @@ public class TransacaoController {
     private final TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<Void> addTransaction(@RequestBody AddTransactionRequestDTO addTransactionRequestDTO) {
+    public ResponseEntity<String> addTransaction(@RequestBody AddTransactionRequestDTO addTransactionRequestDTO) {
         TransactionResponseDTO response = transactionService.add(addTransactionRequestDTO);
         return ResponseEntity
             .created(URI.create("http://localhost:8080/v1/transacoes/" + response.getId()))
@@ -38,6 +38,12 @@ public class TransacaoController {
     public ResponseEntity<List<TransactionResponseDTO>> getAllTransactionsFiltered(FilterDTO filter) {
         List<TransactionResponseDTO> responseList = transactionService.getAllFiltered(filter);
         return ResponseEntity.ok(responseList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TransactionResponseDTO> getTransactionById(@PathVariable Long id) {
+        TransactionResponseDTO response = transactionService.getById(id);
+        return ResponseEntity.ok(response);
     }
 
     @PatchMapping("/{id}")

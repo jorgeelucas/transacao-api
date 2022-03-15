@@ -1,7 +1,5 @@
 package br.com.transacaoapi;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import br.com.transacaoapi.dto.request.AddTransactionRequestDTO;
 import br.com.transacaoapi.dto.response.TransactionResponseDTO;
 import br.com.transacaoapi.entity.TransactionEntity;
-import br.com.transacaoapi.repository.TransactionRepository;
+import br.com.transacaoapi.repository.impl.TransactionRepositoryInMemory;
 import br.com.transacaoapi.service.TransactionService;
 import br.com.transacaoapi.util.TypeEnum;
 //import static org.mockito.Mockito.*;
@@ -30,7 +28,7 @@ public class TransactionServiceTest {
     private TransactionService service;
 
     @Mock
-    private TransactionRepository repository;
+    private TransactionRepositoryInMemory repository;
 
 //    Mockito.mock(TransactionRepository.class);
 //    mock(TransactionRepository.class);

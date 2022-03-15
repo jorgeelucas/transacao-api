@@ -2,8 +2,13 @@ package br.com.transacaoapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+
+import br.com.transacaoapi.repository.TransacaoRepository;
 
 @SpringBootApplication
+@EnableCaching
 public class TransacaoApiApplication {
 
     public static void main(String[] args) {

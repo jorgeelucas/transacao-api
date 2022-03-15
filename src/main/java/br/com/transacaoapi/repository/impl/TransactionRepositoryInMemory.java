@@ -1,19 +1,15 @@
-package br.com.transacaoapi.repository;
+package br.com.transacaoapi.repository.impl;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import br.com.transacaoapi.entity.TransactionEntity;
-import br.com.transacaoapi.util.TypeEnum;
+import br.com.transacaoapi.repository.TransacaoRepository;
 
-@Repository
-public class TransactionRepository {
+public class TransactionRepositoryInMemory {
 
     private static List<TransactionEntity> list = new ArrayList<>();
     private static Long sequence = 1L;
@@ -60,11 +56,22 @@ public class TransactionRepository {
         return list;
     }
 
+    @Cacheable(value = "transacaoEntityPorIdCache", key = "#id")
     public TransactionEntity getById(Long id) {
+        System.out.println("BUSCANDO NO BANCO DE DADOS...");
+        simularLatenciaDeBanco();
         return list.stream()
             .filter(transacao -> transacao.getId().equals(id))
             .findFirst()
             .get();
+    }
+
+    private void simularLatenciaDeBanco() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void update(TransactionEntity entity) {

@@ -19,13 +19,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.ehcache:ehcache:3.9.9',
+            'javax.cache:cache-api:1.1.1',
+            'com.h2database:h2:2.1.210'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compileOnly 'org.apache.httpcomponents:httpclient:4.5.3'
-//    testCompileOnly 'org.mockito:mockito-junit-jupiter:4.3.1'
 }
 
 tasks.named('test') {
